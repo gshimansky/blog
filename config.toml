@@ -1,4 +1,4 @@
 baseURL = "https://gshimansky.github.io"
 languageCode = "en-us"
 title = "Gregory Shimansky blog"
-theme = "ananke"
+theme = "hemingway"

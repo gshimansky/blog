@@ -1,7 +1,7 @@
 ---
 title: "How to clone a libvirt VM controlled by Vagrant"
 date: 2018-08-30T10:16:00-05:00
-draft: true
+draft: false
 ---
 Strangely enough, googling about this problem doesn't produce any
 meaningful results. So here are steps which allow cloning a libvirt VM
@@ -20,16 +20,16 @@ which you want to clone into `testvm2`.
   name instead of `--auto-clone`.
 * Edit your Vagrantfile to produce a configuration for new `testvm2`
   VM. I have an array of VM names which I loop over like this:
-```
-  names_array = ['testvm1', 'testvm2']
-# .....
-  (0..vm_total_number - 1).each do |i|
-    vm_name = names_array[i]
-    config.vm.define "#{vm_name}" do |node|
-      node.vm.hostname = "#{vm_name}"
-# .......
-    end
-  end
+```ruby
+      names_array = ['testvm1', 'testvm2']
+    # .....
+      (0..vm_total_number - 1).each do |i|
+        vm_name = names_array[i]
+        config.vm.define "#{vm_name}" do |node|
+          node.vm.hostname = "#{vm_name}"
+    # .......
+        end
+      end
 ```
 * Find new VM UUID with `virsh dumpxml testvm2 | grep uuid`.
 * Copy directory `.vagrant/machines/testvm1`
